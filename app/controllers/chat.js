@@ -12,5 +12,11 @@ module.exports.startChat = function(application, request, response){
         return;
     }
 
-    response.render("chat");
+    //Recuperando a variável global io definida em app.js
+    application.get("io").emit("msgParaCliente", {
+        apelido: dados.apelido,
+        mensagem: " acabou de entrar no chat"
+    });
+
+    response.render("chat", {user_data: dados});
 }
